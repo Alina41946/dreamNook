@@ -38,18 +38,24 @@ const {
 <!doctype html>
 <html lang="zh-Hant">
   <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width" />
 
- <SEO
-  title={`${title}｜dreamNook`}
-  description={description}
-  noindex={noindex}
-  image={image}
-  type="article"
-  publishedTime={pubDate.toISOString()}
-/>
-</head>
+    <meta charset="UTF-8" />
+
+    <meta
+      name="viewport"
+      content="width=device-width"
+    />
+
+    <SEO
+      title={`${title}｜dreamNook`}
+      description={description}
+      noindex={noindex}
+      image={image}
+      type="article"
+      publishedTime={pubDate.toISOString()}
+    />
+
+  </head>
 
   <body>
 
@@ -98,7 +104,6 @@ const {
 
         </header>
 
-
         <!-- Featured Image -->
         {image && (
           <figure class="article-featured-image">
@@ -111,14 +116,10 @@ const {
           </figure>
         )}
 
-
         <!-- Article Content -->
         <div class="article-content">
-
           <Content />
-
         </div>
-
 
         <!-- Back -->
         <footer class="article-footer">
@@ -135,6 +136,25 @@ const {
       </article>
 
     </main>
+
+    <!-- GA4 Article View -->
+    <script define:vars={{
+      articleTitle: title,
+      articleCategory: category,
+      articleId: article.id
+    }}>
+      window.addEventListener('load', () => {
+        if (typeof window.gtag !== 'function') {
+          return;
+        }
+
+        window.gtag('event', 'article_view', {
+          article_title: articleTitle,
+          article_category: articleCategory,
+          article_id: articleId
+        });
+      });
+    </script>
 
   </body>
 </html>

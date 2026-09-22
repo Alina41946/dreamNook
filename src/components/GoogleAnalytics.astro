@@ -1,0 +1,22 @@
+---
+const measurementId = 'G-YME6N0R32W';
+---
+
+<script
+  async
+  src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
+></script>
+
+<script define:vars={{ measurementId }}>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    window.dataLayer.push(arguments);
+  }
+
+  window.gtag = gtag;
+
+  gtag('js', new Date());
+
+  gtag('config', measurementId);
+</script>
