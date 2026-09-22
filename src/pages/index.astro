@@ -1,17 +1,142 @@
 ---
+import Header from '../components/Header.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+import '../styles/global.css';
 
+const articles = await getCollection(
+  'articles',
+  ({ data }) => data.noindex !== true
+);
+
+articles.sort((a, b) => {
+  return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+});
+
+const latestArticles = articles.slice(0, 3);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>dreamNook｜小小的我，小小的夢</title>
+
+    <meta
+      name="description"
+      content="dreamNook｜記錄生活、旅行、語言學習與一路上的小小夢想。"
+    />
+  </head>
+
+  <body>
+    <Header />
+
+    <main>
+
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero-inner">
+
+          <p class="hero-eyebrow">
+            DREAM NOOK
+          </p>
+
+          <h1>
+            小小的我，<br />
+            小小的夢。
+          </h1>
+
+          <p class="hero-description">
+            儘管渺小，<br />
+            還是慢慢朝著夢想前進。
+          </p>
+
+        </div>
+      </section>
+
+
+      <!-- About -->
+      <section class="about">
+  <div class="section-inner about-inner">
+
+    <div class="about-heading">
+      <p class="section-label">
+        ABOUT
+      </p>
+
+      <h2>
+        關於我
+      </h2>
+    </div>
+
+    <div class="about-content">
+
+      <p class="about-lead">
+        小小的我，<br />
+        也有小小的夢。
+      </p>
+
+      <p>
+        這裡會記錄生活裡那些值得留下來的片段。
+        旅行、語言學習、日本打工，以及一路上遇見的人與故事。
+      </p>
+
+      <p>
+        不一定每一個夢想都很大，
+        但我想認真記錄自己一步一步走過的路。
+      </p>
+
+    </div>
+
+  </div>
+</section>
+
+
+      <!-- Latest Articles -->
+      <section class="latest-articles">
+        <div class="section-inner">
+
+          <div class="section-heading">
+
+            <div>
+              <p class="section-label">
+                JOURNAL
+              </p>
+
+              <h2>
+                最新文章
+              </h2>
+            </div>
+
+            <a
+              href="/dreamNook/articles/"
+              class="section-more"
+            >
+              查看所有文章 →
+            </a>
+
+          </div>
+
+
+          {latestArticles.length > 0 ? (
+            <div class="article-grid">
+
+              {latestArticles.map((article) => (
+                <ArticleCard article={article} />
+              ))}
+
+            </div>
+          ) : (
+            <p>
+              目前還沒有文章。
+            </p>
+          )}
+
+        </div>
+      </section>
+
+    </main>
+  </body>
 </html>

@@ -1,0 +1,279 @@
+---
+import Header from '../../components/Header.astro';
+import { getCollection } from 'astro:content';
+import '../../styles/global.css';
+
+const articles = await getCollection('articles');
+
+const portfolioArticles = articles
+  .filter((article) => article.data.category === '作品集')
+  .sort(
+    (a, b) =>
+      b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  );
+
+const publicArticles = articles
+  .filter((article) => article.data.category !== '作品集')
+  .sort(
+    (a, b) =>
+      b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  );
+
+const portfolioTypes = [
+  '全部',
+  '網頁設計',
+  '頻道包裝',
+  '平面設計',
+  '影像',
+];
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>作品集｜dreamNook</title>
+
+    <meta
+      name="description"
+      content="dreamNook 求職專用頁面｜作品集與文章。"
+    />
+
+    <meta
+      name="robots"
+      content="noindex, nofollow"
+    />
+  </head>
+
+  <body>
+
+    <Header />
+
+    <main class="portfolio-page">
+
+      <!-- Portfolio Header -->
+      <section class="portfolio-header">
+
+        <p class="section-label">
+          PORTFOLIO
+        </p>
+
+        <h1>
+          作品集
+        </h1>
+
+        <p class="portfolio-intro">
+          記錄一路上的設計、網頁與影像作品。
+        </p>
+
+      </section>
+
+
+      <!-- Portfolio Filter -->
+      <nav
+        class="portfolio-filter"
+        aria-label="作品分類"
+      >
+
+        {portfolioTypes.map((type, index) => (
+          <button
+            type="button"
+            class:list={{
+              'portfolio-filter-button': true,
+              active: index === 0,
+            }}
+            data-filter={type}
+          >
+            {type}
+          </button>
+        ))}
+
+      </nav>
+
+
+      <!-- Portfolio -->
+      <section class="portfolio-list">
+
+        {portfolioArticles.length > 0 ? (
+
+          <div class="portfolio-grid">
+
+            {portfolioArticles.map((article) => (
+
+              <article
+                class="portfolio-card"
+                data-portfolio-type={
+                  article.data.portfolioType ?? ''
+                }
+              >
+
+                {article.data.image && (
+                  <a
+                    href={`/dreamNook/sArea/${article.id}/`}
+                    class="portfolio-card-image"
+                  >
+                    <img
+                      src={article.data.image}
+                      alt={article.data.title}
+                    />
+                  </a>
+                )}
+
+                <div class="portfolio-card-body">
+
+                  <p class="portfolio-card-type">
+                    {article.data.portfolioType}
+                  </p>
+
+                  <h2 class="portfolio-card-title">
+
+                    <a
+                      href={`/dreamNook/sArea/${article.id}/`}
+                    >
+                      {article.data.title}
+                    </a>
+
+                  </h2>
+
+                  <p class="portfolio-card-date">
+                    {article.data.pubDate.toLocaleDateString(
+                      'zh-TW'
+                    )}
+                  </p>
+
+                  <p class="portfolio-card-description">
+                    {article.data.description}
+                  </p>
+
+                </div>
+
+              </article>
+
+            ))}
+
+          </div>
+
+        ) : (
+
+          <p class="portfolio-empty">
+            目前還沒有作品。
+          </p>
+
+        )}
+
+      </section>
+
+
+      <!-- Public Articles -->
+      <section class="portfolio-articles">
+
+        <div class="section-heading">
+
+          <div>
+            <p class="section-label">
+              JOURNAL
+            </p>
+
+            <h2>
+              文章
+            </h2>
+          </div>
+
+        </div>
+
+        {publicArticles.length > 0 ? (
+
+          <div class="portfolio-article-list">
+
+            {publicArticles.map((article) => (
+
+              <article class="portfolio-article-item">
+
+                <p>
+                  {article.data.category}
+                </p>
+
+                <h3>
+
+                  <a
+                    href={`/dreamNook/articles/${article.id}/`}
+                  >
+                    {article.data.title}
+                  </a>
+
+                </h3>
+
+                <time>
+                  {article.data.pubDate.toLocaleDateString(
+                    'zh-TW'
+                  )}
+                </time>
+
+              </article>
+
+            ))}
+
+          </div>
+
+        ) : (
+
+          <p>
+            目前還沒有文章。
+          </p>
+
+        )}
+
+      </section>
+
+    </main>
+
+
+    <script>
+      const filterButtons =
+        document.querySelectorAll<HTMLButtonElement>(
+          '.portfolio-filter-button'
+        );
+
+      const portfolioCards =
+        document.querySelectorAll<HTMLElement>(
+          '.portfolio-card'
+        );
+
+      filterButtons.forEach((button) => {
+
+        button.addEventListener('click', () => {
+
+          const filter =
+            button.dataset.filter;
+
+          filterButtons.forEach((item) => {
+            item.classList.remove('active');
+          });
+
+          button.classList.add('active');
+
+          portfolioCards.forEach((card) => {
+
+            const type =
+              card.dataset.portfolioType;
+
+            if (
+              filter === '全部' ||
+              type === filter
+            ) {
+              card.hidden = false;
+            } else {
+              card.hidden = true;
+            }
+
+          });
+
+        });
+
+      });
+    </script>
+
+  </body>
+</html>

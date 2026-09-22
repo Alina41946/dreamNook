@@ -1,0 +1,72 @@
+---
+import Header from '../../../components/Header.astro';
+import ArticleCard from '../../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+import '../../../styles/global.css';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles', ({ data }) => {
+    return data.noindex !== true;
+  });
+
+  const categories = [
+    '語言學習',
+    '日本打工',
+    '旅遊',
+  ];
+
+  return categories.map((category) => ({
+    params: {
+      category,
+    },
+    props: {
+      articles: articles
+        .filter((article) => article.data.category === category)
+        .sort(
+          (a, b) =>
+            b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+        ),
+    },
+  }));
+}
+
+const { category } = Astro.params;
+const { articles } = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>{category}｜文章｜dreamNook</title>
+
+    <meta
+      name="description"
+      content={`dreamNook｜${category}相關文章。`}
+    />
+  </head>
+
+  <body>
+    <Header />
+
+    <main>
+      <p>
+        <a href="/dreamNook/articles/">← 回到文章</a>
+      </p>
+
+      <h1>{category}</h1>
+
+      {articles.length > 0 ? (
+        <div>
+          {articles.map((article) => (
+  <ArticleCard article={article} />
+))}
+        </div>
+      ) : (
+        <p>這個分類目前還沒有文章。</p>
+      )}
+    </main>
+  </body>
+</html>

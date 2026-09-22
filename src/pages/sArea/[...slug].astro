@@ -1,0 +1,78 @@
+---
+import Header from '../../components/Header.astro';
+import { getCollection, render } from 'astro:content';
+import '../../styles/global.css';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles', ({ data }) => {
+    return data.category === '作品集';
+  });
+
+  return articles.map((article) => ({
+    params: {
+      slug: article.id,
+    },
+    props: {
+      article,
+    },
+  }));
+}
+
+const { article } = Astro.props;
+
+const { Content } = await render(article);
+
+const {
+  title,
+  description,
+  pubDate,
+  category,
+  tags,
+} = article.data;
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>{title}｜作品集｜dreamNook</title>
+
+    <meta name="description" content={description} />
+
+    <meta name="robots" content="noindex, nofollow" />
+  </head>
+
+  <body>
+    <Header />
+
+    <main>
+      <p>
+        <a href="/dreamNook/sArea/">
+          ← 回到作品集
+        </a>
+      </p>
+
+      <p>{category}</p>
+
+      <h1>{title}</h1>
+
+      <p>
+        {pubDate.toLocaleDateString('zh-TW')}
+      </p>
+
+      {tags.length > 0 && (
+        <div>
+          {tags.map((tag) => (
+            <span>#{tag} </span>
+          ))}
+        </div>
+      )}
+
+      <hr />
+
+      <Content />
+    </main>
+  </body>
+</html>

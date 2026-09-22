@@ -12,7 +12,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.3.3"
+    "astro": "^7.3.3",
+    "decap-cms-app": "^3.16.2"
   },
   "allowScripts": {
     "esbuild": true

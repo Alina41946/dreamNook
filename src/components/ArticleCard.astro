@@ -1,0 +1,61 @@
+---
+const { article } = Astro.props;
+
+const {
+  title,
+  description,
+  pubDate,
+  category,
+  image,
+} = article.data;
+---
+
+<article class="article-card">
+
+  {image && (
+    <a
+      href={`/dreamNook/articles/${article.id}/`}
+      class="article-card-image"
+      aria-label={`閱讀：${title}`}
+    >
+      <img
+        src={image}
+        alt={title}
+      />
+    </a>
+  )}
+
+  <div class="article-card-body">
+
+    <div class="article-card-meta">
+
+      <span class="article-card-category">
+        {category}
+      </span>
+
+      <time datetime={pubDate.toISOString()}>
+        {pubDate.toLocaleDateString('zh-TW')}
+      </time>
+
+    </div>
+
+    <h2 class="article-card-title">
+      <a href={`/dreamNook/articles/${article.id}/`}>
+        {title}
+      </a>
+    </h2>
+
+    <p class="article-card-description">
+      {description}
+    </p>
+
+    <a
+      href={`/dreamNook/articles/${article.id}/`}
+      class="article-card-more"
+    >
+      閱讀文章 →
+    </a>
+
+  </div>
+
+</article>

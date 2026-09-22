@@ -1,0 +1,110 @@
+---
+import Header from '../../components/Header.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+import '../../styles/global.css';
+
+const articles = await getCollection(
+  'articles',
+  ({ data }) => data.noindex !== true
+);
+
+articles.sort((a, b) => {
+  return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+});
+
+const categories = [
+  '全部',
+  '語言學習',
+  '日本打工',
+  '旅遊',
+];
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>文章｜dreamNook</title>
+
+    <meta
+      name="description"
+      content="dreamNook 的文章，記錄語言學習、日本打工與旅遊生活。"
+    />
+  </head>
+
+  <body>
+    <Header />
+
+    <main class="articles-page">
+
+      <!-- Page Header -->
+      <section class="articles-header">
+
+        <p class="section-label">
+          JOURNAL
+        </p>
+
+        <h1>
+          文章
+        </h1>
+
+        <p class="articles-intro">
+          記錄生活、旅行、語言學習，
+          以及一路上遇見的人與故事。
+        </p>
+
+      </section>
+
+
+      <!-- Category Navigation -->
+      <nav
+        class="article-category-nav"
+        aria-label="文章分類"
+      >
+
+        {categories.map((category) => (
+          category === '全部' ? (
+            <a
+              href="/dreamNook/articles/"
+              class="article-category-link active"
+            >
+              {category}
+            </a>
+          ) : (
+            <a
+              href={`/dreamNook/articles/category/${category}/`}
+              class="article-category-link"
+            >
+              {category}
+            </a>
+          )
+        ))}
+
+      </nav>
+
+
+      <!-- Article List -->
+      <section class="articles-list">
+
+        {articles.length > 0 ? (
+          <div class="article-grid">
+
+            {articles.map((article) => (
+              <ArticleCard article={article} />
+            ))}
+
+          </div>
+        ) : (
+          <p class="articles-empty">
+            目前還沒有文章。
+          </p>
+        )}
+
+      </section>
+
+    </main>
+  </body>
+</html>
