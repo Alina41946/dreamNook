@@ -19,4 +19,28 @@ const measurementId = 'G-YME6N0R32W';
   gtag('js', new Date());
 
   gtag('config', measurementId);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const links = document.querySelectorAll('a[href]');
+
+    links.forEach((link) => {
+      if (!(link instanceof HTMLAnchorElement)) {
+        return;
+      }
+
+      const linkHost = link.hostname;
+      const currentHost = window.location.hostname;
+
+      if (!linkHost || linkHost === currentHost) {
+        return;
+      }
+
+      link.addEventListener('click', () => {
+        window.gtag('event', 'external_link_click', {
+          link_url: link.href,
+          link_text: link.textContent?.trim() || ''
+        });
+      });
+    });
+  });
 </script>
