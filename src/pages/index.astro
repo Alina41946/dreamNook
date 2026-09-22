@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import ArticleCard from '../components/ArticleCard.astro';
+import SEO from '../components/SEO.astro';
 import { getCollection } from 'astro:content';
 import '../styles/global.css';
 
@@ -19,16 +20,15 @@ const latestArticles = articles.slice(0, 3);
 <!doctype html>
 <html lang="zh-Hant">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
 
-    <title>dreamNook｜小小的我，小小的夢</title>
-
-    <meta
-      name="description"
-      content="dreamNook｜記錄生活、旅行、語言學習與一路上的小小夢想。"
-    />
-  </head>
+ <SEO
+  title="dreamNook｜小小的我，小小的夢"
+  description="dreamNook｜記錄生活、旅行、語言學習與一路上的小小夢想。"
+  type="website"
+/>
+</head>
 
   <body>
     <Header />

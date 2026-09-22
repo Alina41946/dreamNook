@@ -1,5 +1,6 @@
 ---
 import Header from '../../components/Header.astro';
+import SEO from '../../components/SEO.astro';
 import { getCollection, render } from 'astro:content';
 import '../../styles/global.css';
 
@@ -37,23 +38,18 @@ const {
 <!doctype html>
 <html lang="zh-Hant">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
 
-    <title>{title}｜dreamNook</title>
-
-    <meta
-      name="description"
-      content={description}
-    />
-
-    {noindex && (
-      <meta
-        name="robots"
-        content="noindex, nofollow"
-      />
-    )}
-  </head>
+ <SEO
+  title={`${title}｜dreamNook`}
+  description={description}
+  noindex={noindex}
+  image={image}
+  type="article"
+  publishedTime={pubDate.toISOString()}
+/>
+</head>
 
   <body>
 

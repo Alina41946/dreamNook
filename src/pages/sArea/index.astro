@@ -1,5 +1,6 @@
 ---
 import Header from '../../components/Header.astro';
+import SEO from '../../components/SEO.astro';
 import { getCollection } from 'astro:content';
 import '../../styles/global.css';
 
@@ -31,21 +32,15 @@ const portfolioTypes = [
 <!doctype html>
 <html lang="zh-Hant">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
 
-    <title>作品集｜dreamNook</title>
-
-    <meta
-      name="description"
-      content="dreamNook 求職專用頁面｜作品集與文章。"
-    />
-
-    <meta
-      name="robots"
-      content="noindex, nofollow"
-    />
-  </head>
+  <SEO
+    title="作品集｜dreamNook"
+    description="dreamNook 求職專用頁面｜作品集與文章。"
+    noindex={true}
+  />
+</head>
 
   <body>
 
