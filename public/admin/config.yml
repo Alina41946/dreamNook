@@ -12,6 +12,10 @@ collections:
     label: 文章
     folder: src/content/articles
     create: true
+    path: '{{slug}}/index'
+
+    media_folder: ''
+    public_folder: ''
 
     fields:
       - label: 標題
