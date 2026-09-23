@@ -54,20 +54,19 @@ h3 {
   line-height: 1.4;
 }
 
-/* =========================
+/* ========================================
    Header
-========================= */
+======================================== */
 
 .site-header {
   width: 100%;
-
-  padding: 28px 0;
-
-  background: transparent;
+  background: #d8d8d8;
+  border-bottom: 1px solid #c2c2c2;
 }
 
 .header-inner {
   width: min(calc(100% - 64px), var(--content-width));
+  min-height: 104px;
   margin-inline: auto;
 
   display: flex;
@@ -77,36 +76,48 @@ h3 {
   gap: 40px;
 }
 
+/* Logo */
+
 .site-logo {
   display: inline-flex;
   flex-direction: column;
 
-  gap: 2px;
+  gap: 4px;
 
   color: var(--color-text);
-
   text-decoration: none;
+
+  transition: opacity 0.2s ease;
+}
+
+.site-logo:hover {
+  color: var(--color-text);
+  opacity: 0.72;
 }
 
 .site-logo-text {
   display: block;
 
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 600;
 
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   line-height: 1.2;
 }
 
 .site-logo-subtitle {
+  display: block;
+
   color: var(--color-muted);
 
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 400;
 
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   line-height: 1.5;
 }
+
+/* Navigation */
 
 .site-nav {
   display: flex;
@@ -116,12 +127,15 @@ h3 {
 }
 
 .site-nav a {
+  position: relative;
+
   color: var(--color-text);
 
   font-size: 0.9rem;
   font-weight: 400;
 
   letter-spacing: 0.08em;
+
   text-decoration: none;
 
   transition:
@@ -1007,36 +1021,35 @@ h3 {
     width: min(calc(100% - 32px), var(--content-width));
   }
 
-  /* Header */
-
   .site-header {
-    padding: 20px 0;
+    width: 100%;
   }
 
   .header-inner {
     width: min(calc(100% - 32px), var(--content-width));
 
-    min-height: 68px;
+    min-height: 88px;
 
     gap: 20px;
   }
 
   .site-logo-text {
     font-size: 1rem;
-
-    letter-spacing: 0.12em;
+    letter-spacing: 0.13em;
   }
 
   .site-logo-subtitle {
-    font-size: 0.65rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
   }
 
   .site-nav {
-    gap: 16px;
+    gap: 18px;
   }
 
   .site-nav a {
-    font-size: 0.875rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
   }
 
   /* Hero */
