@@ -1,5 +1,6 @@
 ---
 import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
 import SEO from '../../components/SEO.astro';
 import { getCollection, render } from 'astro:content';
 import '../../styles/global.css';
@@ -126,7 +127,8 @@ const {
       </footer>
 
     </main>
-
+    
+        <Footer />
 
     <!-- GA4：文章瀏覽 -->
     <script define:vars={{
