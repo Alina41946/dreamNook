@@ -143,17 +143,13 @@ const {
       articleCategory: category,
       articleId: article.id
     }}>
-      window.addEventListener('load', () => {
-        if (typeof window.gtag !== 'function') {
-          return;
-        }
-
+      if (typeof window.gtag === 'function') {
         window.gtag('event', 'article_view', {
           article_title: articleTitle,
           article_category: articleCategory,
           article_id: articleId
         });
-      });
+      }
     </script>
 
   </body>
