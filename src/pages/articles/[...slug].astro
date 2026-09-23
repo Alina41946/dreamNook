@@ -38,13 +38,8 @@ const {
 <!doctype html>
 <html lang="zh-Hant">
   <head>
-
     <meta charset="UTF-8" />
-
-    <meta
-      name="viewport"
-      content="width=device-width"
-    />
+    <meta name="viewport" content="width=device-width" />
 
     <SEO
       title={`${title}｜dreamNook`}
@@ -54,90 +49,86 @@ const {
       type="article"
       publishedTime={pubDate.toISOString()}
     />
-
   </head>
 
   <body>
-
     <Header />
 
     <main class="article-page">
 
-      <article class="article-detail">
+      <!-- 文章開場 -->
+      <header class="article-header">
 
-        <!-- Article Header -->
-        <header class="article-header">
+        <p class="article-category">
+          {category}
+        </p>
 
-          <p class="article-category">
-            {category}
+        <h1>
+          {title}
+        </h1>
+
+        {description && (
+          <p class="article-lead">
+            {description}
           </p>
-
-          <h1>
-            {title}
-          </h1>
-
-          <div class="article-meta">
-
-            <time datetime={pubDate.toISOString()}>
-              {pubDate.toLocaleDateString('zh-TW')}
-            </time>
-
-            {tags.length > 0 && (
-              <>
-                <span class="article-meta-divider">
-                  /
-                </span>
-
-                <div class="article-tags">
-
-                  {tags.map((tag) => (
-                    <span>
-                      #{tag}
-                    </span>
-                  ))}
-
-                </div>
-              </>
-            )}
-
-          </div>
-
-        </header>
-
-        <!-- Featured Image -->
-        {image && (
-          <figure class="article-featured-image">
-
-            <img
-              src={image}
-              alt={title}
-            />
-
-          </figure>
         )}
 
-        <!-- Article Content -->
-        <div class="article-content">
-          <Content />
+        <div class="article-meta">
+
+          <time datetime={pubDate.toISOString()}>
+            {pubDate.toLocaleDateString('zh-TW')}
+          </time>
+
+          {tags.length > 0 && (
+            <>
+              <span class="article-meta-divider">/</span>
+
+              <div class="article-tags">
+                {tags.map((tag) => (
+                  <span>#{tag}</span>
+                ))}
+              </div>
+            </>
+          )}
+
         </div>
 
-        <!-- Back -->
-        <footer class="article-footer">
+      </header>
 
-          <a
-            href="/dreamNook/articles/"
-            class="article-back"
-          >
-            ← 回到文章列表
-          </a>
 
-        </footer>
+      <!-- 主視覺 -->
+      {image && (
+        <figure class="article-featured-image">
+          <img
+            src={image}
+            alt={title}
+          />
+        </figure>
+      )}
 
+
+      <!-- 文章內容 -->
+      <article class="article-content">
+        <Content />
       </article>
+
+
+      <!-- 返回文章列表 -->
+      <footer class="article-footer">
+
+        <a
+          href="/dreamNook/articles/"
+          class="article-back"
+        >
+          ← 回到文章列表
+        </a>
+
+      </footer>
 
     </main>
 
-    <!-- GA4 Article View -->
+
+    <!-- GA4：文章瀏覽 -->
     <script define:vars={{
       articleTitle: title,
       articleCategory: category,
