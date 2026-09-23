@@ -2,82 +2,37 @@
 ---
 
 <header class="site-header">
-
   <div class="header-inner">
 
-    <a
-      href="/dreamNook/"
-      class="site-logo"
-      aria-label="dreamNook 首頁"
-    >
-      <span class="site-logo-text">
-        DREAM NOOK
-      </span>
+    <a href="/dreamNook/" class="site-logo" aria-label="dreamNook 首頁">
+      <span class="site-logo-text">DREAM NOOK</span>
+      <span class="site-logo-subtitle">小小的我，小小的夢</span>
     </a>
 
-
-    <nav
-      class="site-nav"
-      aria-label="主要導覽"
-    >
-
-      <a href="/dreamNook/">
-        首頁
-      </a>
-
-      <a href="/dreamNook/articles/">
-        文章
-      </a>
-
-      <a
-        href="/dreamNook/sArea/"
-        class="portfolio-nav"
-        hidden
-      >
-        作品集
-      </a>
-
+    <nav class="site-nav" aria-label="主要導覽">
+      <a href="/dreamNook/">首頁</a>
+      <a href="/dreamNook/articles/">文章</a>
+      <a href="/dreamNook/sArea/" class="portfolio-nav" hidden>作品集</a>
     </nav>
 
   </div>
-
 </header>
-
 
 <script>
   const portfolioNav =
-    document.querySelector<HTMLElement>(
-      '.portfolio-nav'
-    );
+    document.querySelector<HTMLElement>('.portfolio-nav');
 
   const isPortfolioArea =
-    window.location.pathname.startsWith(
-      '/dreamNook/sArea'
-    );
-
+    window.location.pathname.startsWith('/dreamNook/sArea');
 
   if (isPortfolioArea) {
-
-    sessionStorage.setItem(
-      'dreamNookSpecialArea',
-      'true'
-    );
-
+    sessionStorage.setItem('dreamNookSpecialArea', 'true');
   }
 
-
   const fromSpecialArea =
-    sessionStorage.getItem(
-      'dreamNookSpecialArea'
-    ) === 'true';
+    sessionStorage.getItem('dreamNookSpecialArea') === 'true';
 
-
-  if (
-    portfolioNav &&
-    fromSpecialArea
-  ) {
-
+  if (portfolioNav && fromSpecialArea) {
     portfolioNav.hidden = false;
-
   }
 </script>
