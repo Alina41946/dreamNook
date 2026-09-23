@@ -53,6 +53,8 @@ collections:
         name: image
         widget: image
         required: false
+        media_folder: ''
+        public_folder: ''
 
       - label: 標籤
         name: tags
