@@ -36,6 +36,9 @@
 </header>
 
 <script>
+  const header =
+    document.querySelector<HTMLElement>('.site-header');
+
   const portfolioNav =
     document.querySelector<HTMLElement>('.portfolio-nav');
 
@@ -56,5 +59,21 @@
 
   if (portfolioNav && fromSpecialArea) {
     portfolioNav.hidden = false;
+  }
+
+  if (header) {
+    const updateHeader = () => {
+      if (window.scrollY > 40) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+    };
+
+    updateHeader();
+
+    window.addEventListener('scroll', updateHeader, {
+      passive: true
+    });
   }
 </script>

@@ -1,0 +1,158 @@
+/* =========================
+   Privacy Policy
+========================= */
+
+.privacy-page {
+  width: 100%;
+  padding-bottom: 40px;
+}
+
+/* ----------------------------------------
+   Privacy Header
+---------------------------------------- */
+
+.privacy-header {
+  width: min(calc(100% - 64px), 760px);
+
+  margin: 88px auto 64px;
+
+  text-align: center;
+}
+
+.privacy-header h1 {
+  margin: 0;
+
+  color: var(--color-text);
+
+  font-size: clamp(2rem, 4vw, 3rem);
+
+  font-weight: 500;
+
+  line-height: 1.45;
+
+  letter-spacing: 0.04em;
+}
+
+.privacy-intro {
+  max-width: 620px;
+
+  margin: 28px auto 0;
+
+  color: var(--color-muted);
+
+  font-size: 1rem;
+
+  line-height: 1.9;
+
+  letter-spacing: 0.04em;
+}
+
+/* ----------------------------------------
+   Privacy Content
+---------------------------------------- */
+
+.privacy-content {
+  width: min(calc(100% - 64px), 680px);
+
+  margin-inline: auto;
+
+  color: var(--color-text);
+
+  font-size: 1rem;
+
+  line-height: 2;
+
+  letter-spacing: 0.03em;
+}
+
+.privacy-content section {
+  margin-bottom: 3.5em;
+}
+
+.privacy-content h2 {
+  margin: 0 0 1.2em;
+
+  color: var(--color-text);
+
+  font-size: 1.25rem;
+
+  font-weight: 500;
+
+  line-height: 1.6;
+
+  letter-spacing: 0.05em;
+}
+
+.privacy-content p {
+  margin: 0 0 1.5em;
+}
+
+.privacy-content ul {
+  margin: 0 0 1.5em;
+
+  padding-left: 1.5em;
+}
+
+.privacy-content li {
+  margin-bottom: 0.6em;
+}
+
+/* ----------------------------------------
+   Updated Date
+---------------------------------------- */
+
+.privacy-updated {
+  margin-top: 4em;
+
+  padding-top: 24px;
+
+  border-top: 1px solid var(--color-border);
+
+  color: var(--color-muted);
+
+  font-size: 0.78rem;
+
+  letter-spacing: 0.04em;
+}
+
+/* ----------------------------------------
+   Privacy Mobile
+---------------------------------------- */
+
+@media (max-width: 576px) {
+  .privacy-header {
+    width: calc(100% - 32px);
+
+    margin: 56px auto 44px;
+  }
+
+  .privacy-header h1 {
+    font-size: 1.8rem;
+
+    line-height: 1.5;
+  }
+
+  .privacy-intro {
+    margin-top: 22px;
+
+    font-size: 0.92rem;
+
+    line-height: 1.85;
+  }
+
+  .privacy-content {
+    width: calc(100% - 32px);
+
+    font-size: 0.95rem;
+
+    line-height: 1.95;
+  }
+
+  .privacy-content section {
+    margin-bottom: 3em;
+  }
+
+  .privacy-content h2 {
+    font-size: 1.15rem;
+  }
+}
