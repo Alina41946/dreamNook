@@ -1,0 +1,231 @@
+
+---
+import Header from '../../../../../components/Header.astro';
+import Footer from '../../../../../components/Footer.astro';
+import ArticleCard from '../../../../../components/ArticleCard.astro';
+import SEO from '../../../../../components/SEO.astro';
+import { getCollection } from 'astro:content';
+import '../../../../../styles/global.css';
+
+export async function getStaticPaths() {
+  const ARTICLES_PER_PAGE = 6;
+
+  const articles = await getCollection(
+    'articles',
+    ({ data }) => data.noindex !== true
+  );
+
+  const categories = [
+    '語言學習',
+    '日本打工',
+    '旅遊',
+  ];
+
+  const paths = [];
+
+  for (const category of categories) {
+    const categoryArticles = articles
+      .filter(
+        (article) =>
+          article.data.category === category
+      )
+      .sort(
+        (a, b) =>
+          b.data.pubDate.valueOf() -
+          a.data.pubDate.valueOf()
+      );
+
+    const totalPages = Math.ceil(
+      categoryArticles.length / ARTICLES_PER_PAGE
+    );
+
+    for (let page = 2; page <= totalPages; page++) {
+      const start =
+        (page - 1) * ARTICLES_PER_PAGE;
+
+      const end =
+        start + ARTICLES_PER_PAGE;
+
+      paths.push({
+        params: {
+          category,
+          page: String(page),
+        },
+        props: {
+          articles: categoryArticles.slice(
+            start,
+            end
+          ),
+          currentPage: page,
+          totalPages,
+          category,
+        },
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { category, page } = Astro.params;
+
+const {
+  articles,
+  currentPage,
+  totalPages,
+} = Astro.props;
+
+const categories = [
+  '全部',
+  '語言學習',
+  '日本打工',
+  '旅遊',
+];
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <SEO
+      title={`${category}｜第 ${currentPage} 頁｜文章｜dreamNook`}
+      description={`dreamNook｜${category}相關文章。`}
+    />
+  </head>
+
+  <body>
+    <Header />
+
+    <main class="articles-page">
+
+      <!-- Page Header -->
+      <section class="articles-header">
+
+        <p class="section-label">
+          JOURNAL
+        </p>
+
+        <h1>
+          文章
+        </h1>
+
+        <p class="articles-intro">
+          記錄生活、旅行、語言學習，
+          以及一路上遇見的人與故事。
+        </p>
+
+      </section>
+
+      <!-- Category Navigation -->
+      <nav
+        class="article-category-nav"
+        aria-label="文章分類"
+      >
+
+        {categories.map((item) => (
+          item === '全部' ? (
+            <a
+              href="/dreamNook/articles/"
+              class="article-category-link"
+            >
+              {item}
+            </a>
+          ) : (
+            <a
+              href={`/dreamNook/articles/category/${item}/`}
+              class:list={[
+                'article-category-link',
+                {
+                  active: item === category,
+                },
+              ]}
+            >
+              {item}
+            </a>
+          )
+        ))}
+
+      </nav>
+
+      <!-- Article List -->
+      <section class="articles-list">
+
+        {articles.length > 0 ? (
+          <div class="article-grid">
+
+            {articles.map((article) => (
+              <ArticleCard article={article} />
+            ))}
+
+          </div>
+        ) : (
+          <p class="articles-empty">
+            這個分類目前還沒有文章。
+          </p>
+        )}
+
+      </section>
+
+      <!-- Pagination -->
+      {totalPages > 1 && (
+        <nav
+          class="article-pagination"
+          aria-label="文章分頁"
+        >
+
+          <a
+            href={
+              currentPage === 2
+                ? `/dreamNook/articles/category/${category}/`
+                : `/dreamNook/articles/category/${category}/page/${currentPage - 1}/`
+            }
+            aria-label="上一頁"
+          >
+            ←
+          </a>
+
+          <a
+            href={`/dreamNook/articles/category/${category}/`}
+          >
+            1
+          </a>
+
+          {Array.from(
+            { length: totalPages - 1 },
+            (_, index) => index + 2
+          ).map((pageNumber) => (
+            <a
+              href={`/dreamNook/articles/category/${category}/page/${pageNumber}/`}
+              class:list={{
+                active: pageNumber === currentPage,
+              }}
+              aria-current={
+                pageNumber === currentPage
+                  ? 'page'
+                  : undefined
+              }
+            >
+              {pageNumber}
+            </a>
+          ))}
+
+          {currentPage < totalPages && (
+            <a
+              href={`/dreamNook/articles/category/${category}/page/${currentPage + 1}/`}
+              aria-label="下一頁"
+            >
+              →
+            </a>
+          )}
+
+        </nav>
+      )}
+
+    </main>
+
+    <Footer />
+  </body>
+</html>
+

@@ -1,3 +1,4 @@
+
 ---
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -5,6 +6,8 @@ import ArticleCard from '../../components/ArticleCard.astro';
 import SEO from '../../components/SEO.astro';
 import { getCollection } from 'astro:content';
 import '../../styles/global.css';
+
+const ARTICLES_PER_PAGE = 6;
 
 const articles = await getCollection(
   'articles',
@@ -14,6 +17,17 @@ const articles = await getCollection(
 articles.sort((a, b) => {
   return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
 });
+
+const totalPages = Math.ceil(
+  articles.length / ARTICLES_PER_PAGE
+);
+
+const currentPage = 1;
+
+const currentArticles = articles.slice(
+  0,
+  ARTICLES_PER_PAGE
+);
 
 const categories = [
   '全部',
@@ -89,10 +103,10 @@ const categories = [
       <!-- Article List -->
       <section class="articles-list">
 
-        {articles.length > 0 ? (
+        {currentArticles.length > 0 ? (
           <div class="article-grid">
 
-            {articles.map((article) => (
+            {currentArticles.map((article) => (
               <ArticleCard article={article} />
             ))}
 
@@ -105,7 +119,53 @@ const categories = [
 
       </section>
 
+
+      <!-- Pagination -->
+      {totalPages > 1 && (
+        <nav
+          class="article-pagination"
+          aria-label="文章分頁"
+        >
+
+          <span
+            class="disabled"
+            aria-hidden="true"
+          >
+            ←
+          </span>
+
+          <a
+            href="/dreamNook/articles/"
+            class="active"
+            aria-current="page"
+          >
+            1
+          </a>
+
+          {Array.from(
+            { length: totalPages - 1 },
+            (_, index) => index + 2
+          ).map((pageNumber) => (
+            <a
+              href={`/dreamNook/articles/page/${pageNumber}/`}
+            >
+              {pageNumber}
+            </a>
+          ))}
+
+          <a
+            href="/dreamNook/articles/page/2/"
+            aria-label="下一頁"
+          >
+            →
+          </a>
+
+        </nav>
+      )}
+
     </main>
+
     <Footer />
   </body>
 </html>
+
