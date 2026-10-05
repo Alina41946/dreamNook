@@ -206,7 +206,48 @@
 .article-content li {
   margin-bottom: 0.6em;
 }
+/* ----------------------------------------
+   Article Highlight & Note
+---------------------------------------- */
 
+/* 螢光筆 */
+
+.article-content .highlight {
+  background: linear-gradient(
+    transparent 55%,
+    #fff0a8 55%,
+    #fff0a8 90%,
+    transparent 90%
+  );
+
+  padding: 0 0.12em;
+
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+/* 文字框 */
+
+.article-content .note-box {
+  margin: 2.5em 0;
+
+  padding: 1.4em 1.5em;
+
+  border: 1px solid #b8b0a8;
+
+  background: #e8e3dd;
+
+  color: var(--color-text);
+
+  line-height: 1.9;
+}
+
+/* 文字框內所有文字 */
+
+.article-content .note-box,
+.article-content .note-box p,
+.article-content .note-box strong {
+  color: var(--color-text);
+}
 /* ----------------------------------------
    Article Footer
 ---------------------------------------- */
