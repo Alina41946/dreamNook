@@ -206,6 +206,24 @@
 .article-content li {
   margin-bottom: 0.6em;
 }
+
+/* ----------------------------------------
+   Article Links
+---------------------------------------- */
+
+.article-content a {
+  color: var(--color-primary);
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.article-content a:hover {
+  color: var(--color-text);
+}
 /* ----------------------------------------
    Article Highlight & Note
 ---------------------------------------- */

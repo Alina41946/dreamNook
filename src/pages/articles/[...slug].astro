@@ -144,6 +144,24 @@ const {
         });
       }
     </script>
+        <!-- 文章圖片基本保護 -->
+    <script>
+      document.addEventListener('contextmenu', (event) => {
+        const target = event.target;
+
+        if (target instanceof HTMLImageElement) {
+          event.preventDefault();
+        }
+      });
+
+      document.addEventListener('dragstart', (event) => {
+        const target = event.target;
+
+        if (target instanceof HTMLImageElement) {
+          event.preventDefault();
+        }
+      });
+    </script>
 
   </body>
 </html>

@@ -84,3 +84,9 @@ _日本生活中的某個片段。_
 如果這個網站可以慢慢累積成一個屬於自己的地方，我想那就已經很好了。
 
 想了解更多內容，可以回到[文章列表](/dreamNook/articles/)繼續閱讀。
+
+<p>
+  這是一段測試文字，
+  <a href="https://www.google.com" target="_blank" rel="noopener noreferrer">這是一個外部連結</a>，
+  可以看看文章中的連結樣式是否符合 DreamNook。
+</p>
