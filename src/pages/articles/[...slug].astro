@@ -5,6 +5,15 @@ import SEO from '../../components/SEO.astro';
 import { getCollection, render } from 'astro:content';
 import '../../styles/global.css';
 
+const articleImages = import.meta.glob(
+  '../../content/articles/*/*.{jpg,jpeg,png,webp}',
+  {
+    eager: true,
+    query: '?url',
+    import: 'default',
+  }
+);
+
 export async function getStaticPaths() {
   const articles = await getCollection(
     'articles',
@@ -34,6 +43,14 @@ const {
   image,
   noindex,
 } = article.data;
+
+const imagePath = image
+  ? `../../content/articles/${article.id}/${image}`
+  : '';
+
+const featuredImage = image
+  ? articleImages[imagePath]
+  : undefined;
 ---
 
 <!doctype html>
@@ -46,7 +63,7 @@ const {
       title={`${title}｜dreamNook`}
       description={description}
       noindex={noindex}
-      image={image}
+      image={featuredImage}
       type="article"
       publishedTime={pubDate.toISOString()}
     />
@@ -98,10 +115,10 @@ const {
 
 
       <!-- 主視覺 -->
-      {image && (
+      {featuredImage && (
         <figure class="article-featured-image">
           <img
-            src={image}
+            src={featuredImage}
             alt={title}
           />
         </figure>
@@ -127,8 +144,8 @@ const {
       </footer>
 
     </main>
-    
-        <Footer />
+
+    <Footer />
 
     <!-- GA4：文章瀏覽 -->
     <script define:vars={{
@@ -144,7 +161,8 @@ const {
         });
       }
     </script>
-        <!-- 文章圖片基本保護 -->
+
+    <!-- 文章圖片基本保護 -->
     <script>
       document.addEventListener('contextmenu', (event) => {
         const target = event.target;
