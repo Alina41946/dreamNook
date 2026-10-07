@@ -38,6 +38,7 @@ collections:
           - 日本打工
           - 旅遊
           - 作品集
+          - 其他
 
       - label: 作品類型
         name: portfolioType
