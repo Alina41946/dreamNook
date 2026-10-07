@@ -12,7 +12,7 @@ const articles = defineCollection({
     description: z.string(),
     pubDate: z.coerce.date(),
 
-    category: z.enum(['語言學習', '日本打工', '旅遊', '作品集']),
+    category: z.enum(['語言學習', '日本打工', '旅遊', '作品集', '其他']),
 
     portfolioType: z
       .enum(['網頁設計', '頻道包裝', '平面設計', '影像'])
