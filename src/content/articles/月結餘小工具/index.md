@@ -2,7 +2,7 @@
 title: 月結餘小工具
 description: 2小時用AI開發一個小工具
 pubDate: 2026-10-07T11:39:00.000+08:00
-category: 語言學習
+category: 其他
 image: budget-left.jpg
 tags:
   - 小工具
