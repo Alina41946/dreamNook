@@ -8,18 +8,35 @@ const {
   category,
   image,
 } = article.data;
+
+const articleImages = import.meta.glob(
+  '../content/articles/*/*.{jpg,jpeg,png,webp}',
+  {
+    eager: true,
+    query: '?url',
+    import: 'default',
+  }
+);
+
+const imagePath = image
+  ? `../content/articles/${article.id}/${image}`
+  : '';
+
+const articleImage = image
+  ? articleImages[imagePath]
+  : undefined;
 ---
 
 <article class="article-card">
 
-  {image && (
+  {articleImage && (
     <a
       href={`/dreamNook/articles/${article.id}/`}
       class="article-card-image"
       aria-label={`閱讀：${title}`}
     >
       <img
-        src={image}
+        src={articleImage}
         alt={title}
       />
     </a>
