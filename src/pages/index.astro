@@ -36,63 +36,25 @@ const latestArticles = articles.slice(0, 3);
 
     <main>
 
-      <!-- Hero -->
-      <section class="hero">
-        <div class="hero-inner">
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <picture>
+      <source
+        media="(max-width: 576px)"
+        srcset="/public/images/articles/banner-mobile.jpg"
+      />
 
-          <p class="hero-eyebrow">
-            DREAM NOOK
-          </p>
-
-          <h1>
-            小小的我，<br />
-            小小的夢。
-          </h1>
-
-          <p class="hero-description">
-            儘管渺小，<br />
-            還是慢慢朝著夢想前進。
-          </p>
-
-        </div>
-      </section>
-
-
-      <!-- About -->
-      <section class="about">
-  <div class="section-inner about-inner">
-
-    <div class="about-heading">
-      <p class="section-label">
-        ABOUT
-      </p>
-
-      <h2>
-        關於我
-      </h2>
-    </div>
-
-    <div class="about-content">
-
-      <p class="about-lead">
-        小小的我，<br />
-        也有小小的夢。
-      </p>
-
-      <p>
-        這裡會記錄生活裡那些值得留下來的片段。
-        旅行、語言學習、日本打工，以及一路上遇見的人與故事。
-      </p>
-
-      <p>
-        不一定每一個夢想都很大，
-        但我想認真記錄自己一步一步走過的路。
-      </p>
-
-    </div>
-
+      <img
+        src="/public/images/articles/banner-desktop.jpg"
+        alt="dreamNook｜小小的我，小小的夢"
+      />
+    </picture>
   </div>
 </section>
+
+
+      
 
 
       <!-- Latest Articles -->
@@ -137,6 +99,34 @@ const latestArticles = articles.slice(0, 3);
 
         </div>
       </section>
+
+      <!-- About -->
+      <section class="about">
+  <div class="section-inner about-inner">
+
+    <div class="about-heading">
+      <p class="section-label">
+        ABOUT
+      </p>
+
+      <h2>
+        關於我
+      </h2>
+      <p class="about-lead">
+        是一個考生。
+      </p>
+      <p class="about-lead">
+        紀錄朝著小小的夢想前進的小小的自己。
+       </p>
+    </div>
+
+    <div class="about-content">
+
+      
+    </div>
+
+  </div>
+</section>
 
     </main>
     <Footer />
